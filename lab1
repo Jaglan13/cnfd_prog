@@ -1,0 +1,85 @@
+package akay;
+
+import java.util.Scanner;
+
+interface personal {
+    void show();
+}
+
+interface official {
+    void show1();
+}
+
+abstract class person implements personal, official {
+    public String name;
+    public String address;
+    public long phone;
+
+    person(String name, String address, long phone) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
+}
+
+class Employee extends person {
+    private int empid;
+    private String company;
+    private String desig;
+
+    Employee(String name, String address, long phone, int empid, String company, String desig) {
+        super(name, address, phone);
+        this.empid = empid;
+        this.company = company;
+        this.desig = desig;
+    }
+
+   
+    public void show() {
+        System.out.println("Name: " + name);
+        System.out.println("Address: " + address);
+        System.out.println("Phone: " + phone);
+    }
+
+ 
+    public void show1() {
+        System.out.println("Employee ID: " + empid);
+        System.out.println("Company: " + company);
+        System.out.println("Designation: " + desig);
+    }
+}
+public class Inheritance {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter name:");
+        String name = sc.nextLine();
+
+        System.out.println("Enter address:");
+        String address = sc.nextLine();
+
+        System.out.println("Enter phone:");
+        long phone = sc.nextLong();
+        sc.nextLine(); 
+
+        System.out.println("Enter empid:");
+        int empid = sc.nextInt();
+        sc.nextLine();  
+
+        System.out.println("Enter company:");
+        String company = sc.nextLine();
+
+        System.out.println("Enter designation:");
+        String desig = sc.nextLine();
+
+        Employee e = new Employee(name, address, phone, empid, company, desig);
+        e.show();
+        e.show1();
+
+        sc.close();
+
+	}
+
+}
+
