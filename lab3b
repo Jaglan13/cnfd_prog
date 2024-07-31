@@ -1,0 +1,77 @@
+package abst;
+import java.util.Scanner;
+
+abstract class Ope{
+	abstract int addition(int a, int b);
+	abstract int subtraction(int a, int b);
+	abstract int multiplication(int a, int b);
+}
+ 
+class Ope1 extends Ope{
+	int addition(int a, int b) {
+		System.out.println("Addition of two numbers");
+		int c = a + b;
+		return c;
+	}
+
+	int subtraction(int a, int b) {
+		System.out.println("Subtraction of two numbers");
+		int c = a - b;
+		return c;
+	}
+	
+	int multiplication(int a, int b) {
+		System.out.println("Multiplication of two numbers");
+		int c = a * b;
+		return c;
+	}
+}
+public class Operation {
+	int a,b;
+	Operation(int a, int b){
+		this.a=a;
+		this.b=b;
+	}
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Ope1 o = new Ope1();
+		
+		int n=0;
+		while(n!=3) {
+			System.out.println("\n1.Addition\n2.Subtraction\n3.Multiplication\n");
+			System.out.println("Enter your choice: ");
+			n = sc.nextInt();
+		
+			switch(n) {
+			case 1:
+				System.out.println("Enter number 1 : ");
+				int a = sc.nextInt();
+				System.out.println("Enter number 2 : ");
+				int b = sc.nextInt();
+				System.out.println(o.addition(a,b));
+				break;
+				
+			case 2:
+				System.out.println("Enter number 1 : ");
+				int c = sc.nextInt();
+				System.out.println("Enter number 2 : ");
+				int d = sc.nextInt();
+				System.out.println(o.subtraction(c,d));
+				break;
+				
+			case 3:
+				System.out.println("Enter number 1 : ");
+				int e = sc.nextInt();
+				System.out.println("Enter number 2 : ");
+				int f = sc.nextInt();
+				System.out.println(o.multiplication(e,f));
+				break;
+			
+			default:
+				System.out.println("Invalid input");
+			}
+		}
+		sc.close();
+	}
+		
+}
