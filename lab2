@@ -1,0 +1,137 @@
+circle.java
+
+package lab2;
+
+public class circle
+{
+	private double radius;
+	public circle()
+	{
+		this.radius=radius;
+	}
+	public double getarea(double radius)
+	{
+		return Math.PI * radius*radius;
+	}
+	public double getperimeter(double radius)
+	{
+		return 2*Math.PI *radius;
+	}
+}
+
+
+square.java
+
+package lab2;
+
+public class square
+{
+	private double side;
+	
+public square()
+{
+	this.side=side;
+	}
+public double get_area(double side)
+{
+	return side*side;
+}
+public double get_perimetre(double side)
+{
+return 4*side;
+}
+}
+
+
+
+triangle.java
+
+package lab2;
+
+public class triangle {
+	private double side1;
+	private double side2;
+	private double side3;
+	public triangle()
+	{
+		this.side1=side1;
+		this.side2=side2;
+		this.side3=side3;
+	}
+	public double getarea(double side1,double side2)
+	{
+		return 0.5*side1*side2;
+	}
+	public double getperimeter(double side1,double side2,double side3)
+	{
+		return 0.5*(side1*side2)+side3;
+	}
+}
+
+
+Main.java
+
+package lab;
+
+import java.util.Scanner;
+import lab2.circle;
+import lab2.triangle;
+import lab2.square;
+
+public class Main {
+	public static void main(String[] args)
+	{
+		square square= new square();
+		circle circle= new circle();
+		triangle triangle= new triangle();
+		boolean w1 = true;
+		while(w1)
+		{
+			Scanner s = new Scanner(System.in);
+			System.out.println("1.Area and Perimeter of square\n 2.Area and Perimeter of circle \n 3.Area and Perimeter of Triangle \n 4.Exit");
+			System.out.println("Enter your choice");
+	        int n= s.nextInt();
+	        switch(n)
+	        {
+	        case 1: System.out.println("Enter side of the square");
+	        		double side1=s.nextDouble();
+	        		System.out.println("The area of square is "+ square.get_area(side1)+"cmsq");
+	        		System.out.println("The perimeter of square is "+ square.get_perimetre(side1)+"cm");
+	        		break;
+	        case 2: System.out.println("Enter radius of circles");
+    				double radius=s.nextDouble();
+    				System.out.println("The area of circle is "+ circle.getarea(radius)+"cmsq");
+    				System.out.println("The perimeter of square is "+ circle.getperimeter(radius)+"cm");
+    				break;		
+	        case 3: System.out.println("Enter 1st side of Triangle");
+					double side2=s.nextDouble();
+					System.out.println("Enter 2nd side of Triangle");
+					double side3=s.nextDouble();
+					System.out.println("Enter 3rd side of Triangle");
+					double side4=s.nextDouble();
+					System.out.println("The area of Triangle is "+ triangle.getarea(side2,side3)+"cmsq");
+					System.out.println("The perimeter of triangle is "+ triangle.getperimeter(side2,side3,side4)+"cmcube");
+					break;	
+	        default:
+	        	System.out.println("Invalid entry");
+	        	
+	        		
+	        }
+			System.out.println("You want to exit");
+			System.out.println("1.Yes \n 2.No");
+			int n1= s.nextInt();
+			if(n1 == 1)
+			{
+				w1=true;
+			}
+			else
+			{
+				w1=false;
+			}
+
+			
+		}
+	}
+}
+
+	        
