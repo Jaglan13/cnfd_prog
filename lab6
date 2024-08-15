@@ -1,0 +1,97 @@
+pkg lab6;
+import java.util.LinkedList;
+import java.util.Queue;
+
+class SharedQueue {
+    private final Queue<Integer> queue = new LinkedList<>();
+    private final int capacity;
+
+    public SharedQueue(int capacity) {
+        this.capacity = capacity;
+    }
+
+    // Producer adds items to the queue
+    public void produce(int item) throws InterruptedException {
+        synchronized (this) {
+            // Wait if the queue is full
+            while (queue.size() == capacity) {
+                wait();
+            }
+            // Add item to the queue
+            queue.add(item);
+            System.out.println("Produced: " + item);
+
+            // Notify the consumer that it can consume now
+            notify();
+        }
+    }
+
+    // Consumer removes items from the queue
+    public void consume() throws InterruptedException {
+        synchronized (this) {
+            // Wait if the queue is empty
+            while (queue.isEmpty()) {
+                wait();
+            }
+            // Remove and return the item from the queue
+            int item = queue.poll();
+            System.out.println("Consumed: " + item);
+
+            // Notify the producer that it can produce now
+            notify();
+        }
+    }
+}
+
+class Producer implements Runnable {
+    private final SharedQueue sharedQueue;
+
+    public Producer(SharedQueue sharedQueue) {
+        this.sharedQueue = sharedQueue;
+    }
+
+    @Override
+    public void run() {
+        int item = 0;
+        try {
+            while (true) {
+                sharedQueue.produce(++item);
+                Thread.sleep(500); // Simulating delay
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+
+class Consumer implements Runnable {
+    private final SharedQueue sharedQueue;
+
+    public Consumer(SharedQueue sharedQueue) {
+        this.sharedQueue = sharedQueue;
+    }
+
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                sharedQueue.consume();
+                Thread.sleep(1000); // Simulating delay
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+
+public class ProducerConsumerExample {
+    public static void main(String[] args) {
+        SharedQueue sharedQueue = new SharedQueue(5); // Capacity of the queue is 5
+
+        Thread producerThread = new Thread(new Producer(sharedQueue));
+        Thread consumerThread = new Thread(new Consumer(sharedQueue));
+
+        producerThread.start();
+        consumerThread.start();
+    }
+}
